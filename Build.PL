@@ -13,6 +13,7 @@ my $build = Module::Build->new(
         'Path::Class'   => 0,
         'Test::More'    => 0,
         'Scope::Guard'  => 0,
+    },
     requires => {
         'UR'                    => 0,
         'YAML'                  => 0,
