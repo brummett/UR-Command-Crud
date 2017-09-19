@@ -26,8 +26,8 @@ class Test::Relationship {
     is  => 'UR::Object',
     id_generator => '-uuid',
     id_by => {
-        muppet_id => { is => 'Number', implied_by => 'muppet', },
-        related_id => { is => 'Number', implied_by => 'related' },
+        muppet_id => { is => 'Text', implied_by => 'muppet', },
+        related_id => { is => 'Text', implied_by => 'related' },
         name => { is => 'Text', },
     },
     has => {

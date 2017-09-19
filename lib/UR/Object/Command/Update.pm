@@ -32,7 +32,7 @@ sub execute {
         my $old_value = $obj->$property_name;
         my $old_value_id = UR::Object::Command::CrudUtil->display_id_for_value($old_value);
         if ( $self->only_if_null and defined $old_value ) {
-            $self->status_message("FAILED_NOT_NULL\t%s\t%s", $obj->class, $obj->id, $old_value_id);
+            $self->status_message("FAILED_NOT_NULL\t%s\t%s\t%s", $obj->class, $obj->id, $old_value_id);
             next;
         }
         $obj->$property_name($new_value);

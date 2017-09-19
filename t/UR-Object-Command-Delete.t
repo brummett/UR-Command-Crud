@@ -7,6 +7,7 @@ use Path::Class;
 use lib file(__FILE__)->dir->stringify;
 use TestCrudClasses;
 
+use Scope::Guard;
 use Test::Exception;
 use Test::More tests => 3;
 
@@ -45,9 +46,20 @@ subtest 'command properties' => sub{
 };
 
 subtest 'delete' => sub{
-    plan tests => 3;
+    plan tests => 5;
+
+    my $guard = Scope::Guard->new(sub { $test{cmd}->dump_status_messages(1); $test{cmd}->queue_status_messages(0); });
+    $test{cmd}->dump_status_messages(0);
+    $test{cmd}->queue_status_messages(1);
 
     lives_ok(sub{ $test{cmd}->execute(test_muppet => $test{elmo}); }, 'delete');
+
+    my @messages = $test{cmd}->status_messages;
+    is(scalar(@messages), 1, 'execute generated 1 message');
+    like($messages[0],
+        qr{DELETE\s+Test::Muppet\s\w+},
+        'Delete message');
+
     my $muppet = Test::Muppet->get(name => 'elmo');
     ok(!$muppet, 'delete muppet');
 
