@@ -1,5 +1,9 @@
 Automatic generation of CRUD (create, list (read), update and delete plus copy) sub commands for UR objects.
 
+
+[![Build Status](https://travis-ci.org/genome/UR-Object-Command-Crud.svg?branch=master)](https://travis-ci.org/genome/UR-Object-Command-Crud)
+
+
 Creates trees of Command classes that can handle CRUD operations on UR objects.
 
 ```
