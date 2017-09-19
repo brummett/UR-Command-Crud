@@ -4,7 +4,7 @@ use strict;
 use warnings 'FATAL';
 
 use Path::Class;
-use lib file(__FILE__)->dir->parent->subdir('lib')->absolute->stringify;
+use lib file(__FILE__)->dir->stringify;
 use TestCrudClasses;
 
 use Test::More tests => 1;
@@ -22,18 +22,13 @@ subtest 'exclude properties' => sub{
         sub_command_configs => \%sub_command_configs,
     );
 
-    my $update_job_class_name = 'Test::Muppet::Command::Update::Job';
-    ok(UR::Object::Type->get($update_job_class_name), 'update job command exists');
+    ok(UR::Object::Type->get('Test::Muppet::Command::Update::Job'), 'update job command exists');
 
-    my $update_name_class_name = 'Test::Muppet::Command::Update::Name';
-    ok(!UR::Object::Type->get($update_name_class_name), 'update name command does not exist');
+    ok(!UR::Object::Type->get('Test::Muppet::Command::Update::Name'), 'update name command does not exist');
 
-    my $update_name_class_name = 'Test::Muppet::Command::Update::Friends';
-    ok(!UR::Object::Type->get($update_name_class_name), 'update friends tree does not exist');
-    my $update_name_class_name = 'Test::Muppet::Command::Update::Friends::Add';
-    ok(!UR::Object::Type->get($update_name_class_name), 'update add friends command does not exist');
-    my $update_name_class_name = 'Test::Muppet::Command::Update::Friends::Remove';
-    ok(!UR::Object::Type->get($update_name_class_name), 'update remove friends command does not exist');
+    ok(!UR::Object::Type->get('Test::Muppet::Command::Update::Friends'), 'update friends tree does not exist');
+    ok(!UR::Object::Type->get('Test::Muppet::Command::Update::Friends::Add'), 'update add friends command does not exist');
+    ok(!UR::Object::Type->get('Test::Muppet::Command::Update::Friends::Remove'), 'update remove friends command does not exist');
 
 };
 

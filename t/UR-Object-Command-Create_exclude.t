@@ -4,7 +4,7 @@ use strict;
 use warnings 'FATAL';
 
 use Path::Class;
-use lib file(__FILE__)->dir->parent->subdir('lib')->absolute->stringify;
+use lib file(__FILE__)->dir->stringify;
 use TestCrudClasses;
 
 use List::MoreUtils 'any';

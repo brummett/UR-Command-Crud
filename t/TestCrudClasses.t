@@ -4,6 +4,7 @@ use strict;
 use warnings 'FATAL';
 
 use Path::Class;
+use lib file(__FILE__)->dir->stringify;
 use Test::More tests => 2;
 
 subtest 'ENVs' => sub{

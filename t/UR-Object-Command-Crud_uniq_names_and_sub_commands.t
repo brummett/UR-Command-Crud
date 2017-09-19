@@ -4,7 +4,7 @@ use strict;
 use warnings 'FATAL';
 
 use Path::Class;
-use lib file(__FILE__)->dir->parent->subdir('lib')->absolute->stringify;
+use lib file(__FILE__)->dir->stringify;
 use TestCrudClasses;
 
 use Test::More tests => 1;
@@ -26,7 +26,7 @@ subtest 'unique names and classes' => sub{
         target_class => 'Test::Muppet',
     );
 
-    my $pkg = 'Test::Muppet::Command';
+    $pkg = 'Test::Muppet::Command';
     ok(UR::Object::Type->get($pkg), 'muppet tree command exists'),
     is_deeply(
         [ $pkg->sub_command_names ],
