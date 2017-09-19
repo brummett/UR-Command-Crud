@@ -34,10 +34,14 @@ sub execute {
 
     my $copy = $self->source->copy();
 
+    my $failure;
     for my $change ($self->changes) {
         my ($key, $op, $value) = $change =~ /^(.+?)(=|\+=|\-=|\.=)(.*)$/;
-        $self->fatal_message("Invalid change: $change") unless $key and defined $op;
-        $self->fatal_message('Invalid property %s for %s', $key, $copy->__display_name__) if !$copy->can($key);
+        $failure = "Invalid change: $change" and last
+            unless $key and defined $op;
+        $failure = sprintf('Invalid property %s for %s', $key, $copy->__display_name__) and last
+            if !$copy->can($key);
+
         $value = undef if $value eq '';
 
         if ($op eq '=') {
@@ -54,9 +58,9 @@ sub execute {
         }
     }
 
-    if (!$tx->commit ) {
+    if ($failure or !$tx->commit ) {
         $tx->rollback;
-        $self->fatal_message('Failed to commit software transaction!');
+        $self->fatal_message($failure || 'Failed to commit software transaction!');
     }
 
     $self->status_message("NEW\t%s\t%s", $copy->class, $copy->__display_name__);

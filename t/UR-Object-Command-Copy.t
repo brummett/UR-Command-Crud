@@ -40,13 +40,17 @@ subtest 'setup' => sub{
 };
 
 subtest 'fails' => sub{
-    plan tests => 4;
+    plan tests => 5;
 
+    my $object_count = scalar( () = Test::Muppet->get() );
     throws_ok(sub{ $test{cmd}->execute(source => $test{ernie}, changes => [ "= Invalid Change" ]); }, qr/Invalid change/, 'fails w/ invalid change');
     throws_ok(sub{ $test{cmd}->execute(source => $test{ernie}, changes => [ "names.= Burt" ]); }, qr/Invalid property/, 'fails w/ invalid property');
     throws_ok(sub{ $test{cmd}->execute(source => $test{ernie}, changes => [ "name.= jr", "title=invalid" ]); }, qr/Failed to commit/, 'fails w/ invalid title');
     ok(!Test::Muppet->get(name => 'ernie jr'), 'did not create muppet w/ invalid title;');
 
+    is(scalar( () = Test::Muppet->get() ),
+        $object_count,
+        'no new objects were created foring failure testing')
 };
 
 subtest 'copy' => sub{
