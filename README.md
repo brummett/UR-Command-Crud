@@ -2,7 +2,7 @@ Automatic generation of CRUD (create, list (read), update and delete plus copy) 
 
 
 [![Build Status](https://travis-ci.org/genome/UR-Object-Command-Crud.svg?branch=master)](https://travis-ci.org/genome/UR-Object-Command-Crud)
-
+[![Coverage Status](https://coveralls.io/repos/github/genome/UR-Object-Command-Crud/badge.svg?branch=master)](https://coveralls.io/github/genome/UR-Object-Command-Crud?branch=master)
 
 Creates trees of Command classes that can handle CRUD operations on UR objects.
 
