@@ -1,4 +1,5 @@
 Build.PL
+cpanfile
 INSTALL
 lib/UR/Object/Command/Copy.pm
 lib/UR/Object/Command/Create.pm
